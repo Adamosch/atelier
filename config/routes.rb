@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   get 'users/:user_id/reservations', to: 'reservations#users_reservations', as: 'users_reservations'
   get 'google-isbn', to: 'google_books#show'
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   resources :books
 end

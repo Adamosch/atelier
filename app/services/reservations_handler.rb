@@ -6,9 +6,10 @@ class ReservationsHandler
   def take(book)
     return "Books is not available for reservation" unless book.can_be_taken?(user)
     if book.available_reservation.present?
+      perform_expiration_worker(book, available_reservation)
       book.available_reservation.update_attributes(status: 'TAKEN')
     else
-      book.reservations.create(user: user, status: 'TAKEN')
+      perform_expiration_worker(book, book.reservations.create(user: user, status: 'TAKEN'))
     end
   end
 
@@ -22,7 +23,6 @@ class ReservationsHandler
   def reserve(book)
     return unless book.can_reserve?(user)
     book.reservations.create(user: user, status: 'RESERVED')
-
   end
 
   def cancel_reservation(book)
@@ -33,6 +33,10 @@ class ReservationsHandler
   private
   attr_reader :user
 
+  def perform_expiration_worker(book, res)
+    ::BookReservationExpireWorker.perform_at(book.res.expires_at - 1.day,
+                                             book.res.book_id)
+  end
 
   def next_in_queue(book)
     book.reservations.where(status: 'RESERVED').order(created_at: :asc).first
