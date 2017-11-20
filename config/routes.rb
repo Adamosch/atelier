@@ -11,5 +11,16 @@ Rails.application.routes.draw do
   get 'users/:user_id/reservations', to: 'reservations#users_reservations', as: 'users_reservations'
   get 'google-isbn', to: 'google_books#show'
 
-  resources :books
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
+  get 'books/filter', to: 'books#filter', as: 'filter'
+
+  resources :books do
+    collection do
+      get 'by_category/:name', action: :by_category
+    end
+  end
+
+  get 'api/v1/books/lookup', to: 'api/v1/books#lookup'
 end
