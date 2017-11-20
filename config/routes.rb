@@ -14,5 +14,13 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  resources :books
+  get 'books/filter', to: 'books#filter', as: 'filter'
+
+  resources :books do
+    collection do
+      get 'by_category/:name', action: :by_category
+    end
+  end
+
+  get 'api/v1/books/lookup', to: 'api/v1/books#lookup'
 end
