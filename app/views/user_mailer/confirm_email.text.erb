@@ -1,0 +1,2 @@
+Cześć <%= @user.name %>!
+Prosimy o potwierdzenie maila klikając w link <%= link_to 'potwierdź', user_confirm_email_url(@user.token, host: "localhost:3000") %>

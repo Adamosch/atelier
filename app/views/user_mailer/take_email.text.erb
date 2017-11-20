@@ -1,0 +1,8 @@
+Cześć <%= @user.name %>!
+Wypożyczyłeś książkę: <%= @book.title %>.
+Data publikacji: <%= @book.published_date %>
+Język: <%= @book.language %>
+
+Link do książki: <%= link_to "Link", book_url(@book, host: "localhost:3000") %>
+
+Prosimy o zwrot do <%= @book.reservations.where(user_id: @user.id).last.expires_at %>

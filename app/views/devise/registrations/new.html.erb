@@ -10,6 +10,11 @@
     </div>
 
     <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
       <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "off" %>
       <% if @minimum_password_length %>
