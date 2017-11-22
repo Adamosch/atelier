@@ -18,6 +18,12 @@ $status-taken: #42ab65;
 $status-canceled: #ccc4c1;
 $status-returned: #37474F;
 
+.index {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 // simple css reset
 *, *::after, *::before {
   box-sizing: border-box;
