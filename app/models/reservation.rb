@@ -36,7 +36,7 @@ class Reservation < ApplicationRecord
 
   def set_expiration
     if taken?
-      self.expires_at = Time.now + 2.weeks
+      self.expires_at = Time.now + 1.day
     elsif available?
       self.expires_at = Time.now + 1.day
     end
