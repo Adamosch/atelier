@@ -10,7 +10,7 @@ class Book < ApplicationRecord
   end
 
   def category_name=(name)
-    self.category = Category.create(name: name)
+    self.category = Category.where(name: name).first_or_initialize
   end
 
   def can_be_taken?(user)

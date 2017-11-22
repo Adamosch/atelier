@@ -1,3 +1,3 @@
-class Category < ApplicationRecord
-  has_many :books
+class Category < ActiveYaml::Base
+  set_root_path "db/data"
 end
