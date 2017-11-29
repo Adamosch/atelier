@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171129193531) do
+ActiveRecord::Schema.define(version: 20171129194813) do
 
   create_table "authors", force: :cascade do |t|
     t.string "firstname"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20171129193531) do
     t.integer "book_id"
     t.integer "user_id"
     t.datetime "expires_at"
+    t.string "calendar_event_oid"
     t.index ["book_id"], name: "index_book_reservations_on_book_id"
     t.index ["user_id"], name: "index_book_reservations_on_user_id"
   end
