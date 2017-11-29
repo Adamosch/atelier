@@ -21,6 +21,7 @@ gem 'sidekiq'
 gem 'active_hash'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
+gem 'google-api-client', '0.8.2', require: 'google/api_client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -252,7 +252,12 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, Figaro.env.google_client_id,
-                  Figaro.env.google_client_secret, {}
+                  Figaro.env.google_client_secret, {
+                    access_type: "offline",
+                    prompt: "consent",
+                    select_account: true,
+                    scope: 'userinfo.email, calendar'
+                  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
